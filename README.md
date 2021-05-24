@@ -1,7 +1,7 @@
-#  <h1> iteracao1
+<h1> iteracao1
 Primeira iteração do projeto de PS
 
-#  <h1> Grupo
+<h1> Grupo
 * Adrian Moagne
 * Andrew Wetmann
 * Guilherme Bianchini
