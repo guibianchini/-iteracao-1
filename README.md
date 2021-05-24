@@ -6,3 +6,5 @@ Primeira iteração do projeto de PS
 * Andrew Wetmann
 * Guilherme Bianchini
 * Guilherme Oliveira
+* Matheus Alves
+* Plácido Neto
