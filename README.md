@@ -1,10 +1,8 @@
-iteracao1
+# iteracao1 <h1> 
 Primeira iteração do projeto de PS
 
-Grupo:
-Adrian Moagne
-Andrew Wetmann
-Guilherme Bianchini
-Guilherme Oliveira
-
-
+# Grupo <h1> 
+* Adrian Moagne
+* Andrew Wetmann
+* Guilherme Bianchini
+* Guilherme Oliveira
