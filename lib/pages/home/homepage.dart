@@ -1,10 +1,9 @@
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
-import 'package:hello_word/pages/home/data/data_users.dart';
-import 'package:hello_word/pages/home/widgets/my_app_bar.dart';
-import 'package:hello_word/pages/home/widgets/my_dots_app.dart';
-import 'package:hello_word/pages/home/widgets/page_view_app.dart';
+import 'package:hello_word/components/my_app_bar.dart';
+import 'package:hello_word/components/my_dots_app.dart';
+import 'package:hello_word/components/page_view_app.dart';
 
 class HomePage extends StatefulWidget {
   @override

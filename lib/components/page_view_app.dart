@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_word/pages/home/widgets/card_app.dart';
+import 'package:hello_word/components/card_app.dart';
 
 class PageViewApp extends StatelessWidget {
   final double top;
