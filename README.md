@@ -12,8 +12,7 @@
     + Adriano
     + Andrew
 
-
-    Inicialmente, Matheuszinn e Adriano encarregados do que tange ao Firebase, e Andrew e Bianchini ao que tange o redux. 
+    Inicialmente, Matheuszinn e Adriano encarregados do Firebase, e Andrew e Bianchini do redux. 
 
 ### Coisas que faltam implementar
     
