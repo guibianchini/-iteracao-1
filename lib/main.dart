@@ -71,7 +71,7 @@ class Exemplo extends StatelessWidget {
         primarySwatch: Colors.teal, // definindo cor primária = roxa
         brightness: Brightness.light,
       ),
-      home: pages.HomePage(),
+      home: pages.LoginPage(),
     );
   }
 }

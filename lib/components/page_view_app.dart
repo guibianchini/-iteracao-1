@@ -5,20 +5,16 @@ class PageViewApp extends StatelessWidget {
   final double top;
   final ValueChanged<int> onChanged;
   final GestureDragUpdateCallback onPanUpdate;
-  final bool showMenu;
   const PageViewApp(
       {Key? key,
       required this.top,
       required this.onChanged,
-      required this.onPanUpdate,
-      required this.showMenu})
+      required this.onPanUpdate})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedPositioned(
-      duration: Duration(milliseconds: 300),
-      curve: Curves.easeOut,
+    return Positioned(
       top: top,
       height: MediaQuery.of(context).size.height * .45,
       left: 0,
@@ -27,9 +23,7 @@ class PageViewApp extends StatelessWidget {
         onPanUpdate: onPanUpdate,
         child: PageView(
           onPageChanged: onChanged,
-          physics: showMenu
-              ? NeverScrollableScrollPhysics()
-              : BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           children: <Widget>[
             CardApp(),
             CardApp(),
