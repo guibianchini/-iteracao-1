@@ -3,6 +3,8 @@ import 'package:hello_word/components/BoxInputField.dart';
 import 'package:hello_word/components/PasswordBox.dart';
 import 'package:hello_word/components/TextBox.dart';
 
+import '../pages.dart';
+
 class Signup extends StatelessWidget {
   const Signup({Key? key}) : super(key: key);
 
@@ -11,6 +13,12 @@ class Signup extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+          leading: BackButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => HomePage()));
+            },
+          ),
           elevation: 20,
           centerTitle: true,
           backgroundColor: Color(0xff01897d),
