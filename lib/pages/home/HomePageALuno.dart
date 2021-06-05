@@ -1,24 +1,26 @@
-//import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:hello_word/components/users_data.dart';
 import 'package:hello_word/components/user_tile.dart';
 
 import '../pages.dart';
 
-class HomePage extends StatefulWidget {
+class HomePageAluno extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageAlunoState createState() => _HomePageAlunoState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageAlunoState extends State<HomePageAluno> {
   final users = {...data_Users};
 
   @override
   Widget build(BuildContext context) {
+    double nota1 = 5;
+    double nota2 = 7;
+    double media = (nota1 + nota2) / 2;
+
     return Scaffold(
+      backgroundColor: Colors.teal,
       appBar: AppBar(
-        elevation: 20,
         centerTitle: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -53,14 +55,6 @@ class _HomePageState extends State<HomePage> {
               color: Color(0xff01897d),
             )),
         ListTile(
-          leading: Icon(Icons.app_registration_outlined),
-          title: Text('Registrar Aluno'),
-          onTap: () => {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Signup()))
-          },
-        ),
-        ListTile(
           leading: Icon(Icons.exit_to_app_outlined),
           title: Text('Sair'),
           onTap: () => {
@@ -69,14 +63,42 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ])),
-      body: Stack(
-        children: <Widget>[
-          ListView.builder(
-              itemCount: users.length,
-              itemBuilder: (context, i) =>
-                  UserTileGrade(users.values.elementAt(i))),
-        ],
-      ),
+      body: Center(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+            Text(
+              'Nota 1: $nota1',
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Nota 2: $nota2',
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Média: $media',
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ])),
     );
   }
 }

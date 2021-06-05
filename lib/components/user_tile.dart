@@ -20,15 +20,17 @@ class _UserTileGradeState extends State<UserTileGrade> {
             child: Icon(Icons.person),
           )
         : CircleAvatar(backgroundImage: NetworkImage(widget.user.avatarUrl));
-    return ListTile(
-        leading: avatar,
-        title: Text(widget.user.name),
-        subtitle: Text(widget.user.email),
-        trailing: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => GradesPageAdd()));
-            },
-            child: Icon(Icons.add)));
+    return Container(
+      child: ListTile(
+          leading: avatar,
+          title: Text(widget.user.name),
+          subtitle: Text(widget.user.email),
+          trailing: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => GradesPageAdd()));
+              },
+              child: Icon(Icons.add))),
+    );
   }
 }

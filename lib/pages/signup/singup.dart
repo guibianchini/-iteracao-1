@@ -78,6 +78,25 @@ class Signup extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(60, 0, 0, 0),
                     child: Text(
+                      'Log in',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+                BoxInputField(
+                  icon: Icons.badge,
+                  onChanged: (value) {},
+                ),
+                SizedBox(height: size.height * 0.01),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(60, 0, 0, 0),
+                    child: Text(
                       'Password',
                       style: TextStyle(
                         color: Colors.white,

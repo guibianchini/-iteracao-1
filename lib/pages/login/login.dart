@@ -67,6 +67,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 PasswordBox(onChanged: (value) {}),
+                SizedBox(height: size.height * 0.05),
                 TextBox(
                     text: 'Login',
                     press: () {

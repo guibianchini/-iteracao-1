@@ -1,4 +1,3 @@
-
 import '../models/user.dart';
 
 const data_Users = {
@@ -17,4 +16,3 @@ const data_Users = {
         'https://www.pngfind.com/pngs/m/341-3415733_male-portrait-avatar-face-head-black-hair-shirt.png',
   ),
 };
-
