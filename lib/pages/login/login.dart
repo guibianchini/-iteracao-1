@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hello_word/components/BoxInputField.dart';
 import 'package:hello_word/components/PasswordBox.dart';
-import 'package:hello_word/components/TextBox.dart';
+import 'package:provider/provider.dart';
 
-import '../pages.dart';
+import '../../services/auth.dart';
+import 'package:hello_word/AppState.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -66,14 +70,17 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                PasswordBox(onChanged: (value) {}),
+                PasswordBox(onChanged: (value) {
+                  setState(() {});
+                }),
                 SizedBox(height: size.height * 0.05),
-                TextBox(
-                    text: 'Login',
-                    press: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => HomePage()));
-                    }),
+                Consumer<AppState>(
+                    builder: (context, appState, _) => Auth(
+                          logInWithEmailAndPassword:
+                              appState.signInWithEmailAndPassword,
+                          loginState: appState.loginState,
+                          signOut: appState.signOut,
+                        )),
               ],
             ),
           ],

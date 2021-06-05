@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hello_word/components/users_data.dart';
-import 'package:hello_word/components/user_tile.dart';
 
 import '../pages.dart';
 

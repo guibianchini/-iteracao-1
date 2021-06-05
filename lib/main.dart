@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:hello_word/AppState.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/pages.dart' as pages;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  //SystemChrome.setSystemUIOverlayStyle(SystemUIOverlayStyle.dark)
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      //systemNavigationBarColor: Colors.blue, // cor da barra de navegação
-      //statusBarColor: Colors.pink, // cor da barra de status
-      statusBarBrightness: Brightness
-          .dark //praticamente a mesma coisa do de cima mas no emulador não mudou nada pois a letra já é branca
-      ));
-  runApp(App());
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarBrightness: Brightness.dark));
+  runApp(ChangeNotifierProvider(
+    create: (context) => AppState(),
+    builder: (context, _) => App(),
+  ));
 }
 
 class App extends StatefulWidget {
@@ -21,9 +22,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  //Placeholder enquanto não tem a confguração do firebase kkkkkk
-  final Future<String> _future =
-      Future<String>.delayed(const Duration(seconds: 10), () => "Placeholder");
+  final Future<FirebaseApp> _future = Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class _AppState extends State<App> {
       future: _future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return Exemplo();
+          return OurClass();
         }
         return MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -48,7 +47,6 @@ class _AppState extends State<App> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 16),
-                  //Mentira kkkkkkkkkkkkkkkkkk0
                   child: Text('Carregando Firebase...'),
                 )
               ],
@@ -60,15 +58,14 @@ class _AppState extends State<App> {
   }
 }
 
-class Exemplo extends StatelessWidget {
+class OurClass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner:
-          false, //removendo o selo de debug que aparece no app
-      title: 'BigAtividade',
+      debugShowCheckedModeBanner: false,
+      title: 'Iteração 1',
       theme: ThemeData(
-        primarySwatch: Colors.teal, // definindo cor primária = roxa
+        primarySwatch: Colors.teal,
         brightness: Brightness.light,
       ),
       home: pages.LoginPage(),
