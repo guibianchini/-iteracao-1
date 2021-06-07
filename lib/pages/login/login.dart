@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_word/components/TextBox.dart';
+import 'package:hello_word/models/user_type.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/PasswordFormInput.dart';
@@ -87,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                     builder: (context, appState, _) => TextBox(
                         text: 'Login',
                         press: () async {
-                          bool shouldNavigate = await appState
+                          UserType shouldNavigate = await appState
                               .signInWithEmailAndPassword(
                                   _emailFormController.text,
                                   _passwordFormController.text, (e) {
@@ -105,11 +106,22 @@ class _LoginPageState extends State<LoginPage> {
                                       ],
                                     ));
                           });
-                          if (shouldNavigate) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => pages.HomePage()));
-                            _emailFormController.clear();
-                            _passwordFormController.clear();
+                          print(shouldNavigate.cond);
+                          print(shouldNavigate.usertype);
+                          if (shouldNavigate.cond) {
+                            if (shouldNavigate.usertype == 1) {
+                              print('é professor');
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => pages.HomePage()));
+                              _emailFormController.clear();
+                              _passwordFormController.clear();
+                            } else if (shouldNavigate.usertype == 0) {
+                              print('é aluno meu deus q odio vo me matar');
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => pages.HomePageAluno()));
+                              _emailFormController.clear();
+                              _passwordFormController.clear();
+                            }
                           }
                         })),
               ],
