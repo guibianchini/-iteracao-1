@@ -106,17 +106,11 @@ class _LoginPageState extends State<LoginPage> {
                                       ],
                                     ));
                           });
-                          print(shouldNavigate.cond);
-                          print(shouldNavigate.usertype);
                           if (shouldNavigate.cond) {
                             if (shouldNavigate.usertype == 1) {
-                              print('é professor');
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => pages.HomePage()));
-                              _emailFormController.clear();
-                              _passwordFormController.clear();
                             } else if (shouldNavigate.usertype == 0) {
-                              print('é aluno meu deus q odio vo me matar');
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => pages.HomePageAluno()));
                               _emailFormController.clear();

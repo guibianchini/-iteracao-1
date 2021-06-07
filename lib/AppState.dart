@@ -65,17 +65,27 @@ class AppState extends ChangeNotifier {
                   if (doc.id == uid) {
                     uType.cond = true;
                     uType.usertype = 1;
-                    print('nossa que odio');
                   }
                 })
               });
 
+      await FirebaseFirestore.instance
+          .collection('alunos')
+          .where('userId', isEqualTo: uid)
+          .get()
+          .then((QuerySnapshot querySnapshot) => {
+                querySnapshot.docs.forEach((doc) {
+                  if (doc.data().toString().contains(uid)) {
+                    uType.cond = true;
+                    uType.usertype = 0;
+                  }
+                })
+              });
       return uType;
     } on FirebaseAuthException catch (e) {
       UserType uType1 = UserType(cond: false, usertype: 2);
       print(e.message);
       errorCallback(e);
-      print('entra aqui');
       return uType1;
     }
   }
