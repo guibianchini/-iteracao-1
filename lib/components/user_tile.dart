@@ -20,8 +20,8 @@ class _UserTileGradeState extends State<UserTileGrade> {
     return Container(
       child: ListTile(
           leading: avatar,
-          title: Text(widget.user.name == null ? "Teste" : ""),
-          subtitle: Text(widget.user.email),
+          title: Text(widget.user.name == null ? "Teste" : widget.user.name!),
+          subtitle: Text(widget.user.email!),
           trailing: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(

@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -66,18 +64,17 @@ class AppState extends ChangeNotifier {
   Future<bool> registerUser(String email, String displayName, String password,
       void Function(FirebaseAuthException e) errorCallback) async {
     try {
-      UserCredential cr = await FirebaseAuth.instance
+      var crr = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      await cr.user!.updateDisplayName(displayName);
+      await crr.user!.updateDisplayName(displayName);
 
       FirebaseFirestore.instance.collection('alunos').add({
-        'displayName': cr.user!.displayName,
-        'userId': cr.user!.uid,
-        'email': cr.user!.email,
+        'displayName': crr.user?.displayName,
+        'email': crr.user?.email,
+        'role': "user",
         'timestamp': DateTime.now().millisecondsSinceEpoch,
-        'role': 'user',
+        'userId': crr.user?.uid
       });
-      print(cr.toString());
       return true;
     } on FirebaseAuthException catch (e) {
       errorCallback(e);
@@ -85,8 +82,9 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  Future<void> update() async {}
+
   void signOut() {
     FirebaseAuth.instance.signOut();
-    currentUser = null;
   }
 }

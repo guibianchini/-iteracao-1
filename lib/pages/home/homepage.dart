@@ -68,9 +68,11 @@ class _HomePageState extends State<HomePage> {
                   return ListTile(
                       leading: Icon(Icons.exit_to_app_outlined),
                       title: Text('Sair'),
-                      onTap: () => {
-                            value.signOut()
-                          });
+                      onTap: () {
+                        value.signOut();
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => pages.LoginPage()));
+                      });
                 },
               ),
             ])),
