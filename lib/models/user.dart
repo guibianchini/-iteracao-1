@@ -1,7 +1,7 @@
 class Student {
   final String id;
-  String? name = "";
-  final String? email;
+  final String name;
+  final String email;
 
   Student({
     required this.id,

@@ -13,19 +13,14 @@ class UserTileGrade extends StatefulWidget {
 class _UserTileGradeState extends State<UserTileGrade> {
   @override
   Widget build(BuildContext context) {
-    // ignore: unnecessary_null_comparison
-    final avatar = CircleAvatar(
-      child: Icon(Icons.person),
-    );
     return Container(
       child: ListTile(
-          leading: avatar,
-          title: Text(widget.user.name == null ? "Teste" : widget.user.name!),
-          subtitle: Text(widget.user.email!),
+          title: Text(widget.user.name),
+          subtitle: Text(widget.user.email),
           trailing: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => GradesPageAdd()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => GradesPageAdd(user: widget.user)));
               },
               child: Icon(Icons.add))),
     );

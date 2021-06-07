@@ -28,8 +28,9 @@ class AppState extends ChangeNotifier {
           event.docs.forEach((element) {
             _students.add(Student(
                 id: element.data()['userId'],
-                name: null,
+                name: element.data()['displayName'],
                 email: element.data()['email']));
+            print(_students);
           });
         });
         notifyListeners();
@@ -69,11 +70,13 @@ class AppState extends ChangeNotifier {
       await crr.user!.updateDisplayName(displayName);
 
       FirebaseFirestore.instance.collection('alunos').add({
-        'displayName': crr.user?.displayName,
+        'displayName': displayName,
         'email': crr.user?.email,
         'role': "user",
         'timestamp': DateTime.now().millisecondsSinceEpoch,
-        'userId': crr.user?.uid
+        'userId': crr.user?.uid,
+        'nota1': 0,
+        'nota2': 0,
       });
       return true;
     } on FirebaseAuthException catch (e) {
@@ -82,7 +85,22 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  Future<void> update() async {}
+  void updateGrades(Student student, num n1, num n2) async {
+    String uniqueID = '';
+    await FirebaseFirestore.instance
+        .collection('alunos')
+        .where('email', isEqualTo: student.email)
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((documentSnapshot) {
+        uniqueID = documentSnapshot.id.toString();
+      });
+    });
+    await FirebaseFirestore.instance
+        .collection('alunos')
+        .doc(uniqueID)
+        .update({"nota1": n1, "nota2": n2});
+  }
 
   void signOut() {
     FirebaseAuth.instance.signOut();

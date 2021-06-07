@@ -37,12 +37,12 @@ class _AppState extends State<App> {
           home: Scaffold(
             body: Center(
                 child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    child: CircularProgressIndicator(),
-                    width: 60,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  child: CircularProgressIndicator(),
+                  width: 60,
                   height: 60,
                 ),
                 Padding(

@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:hello_word/components/BoxInputField.dart';
-import 'package:hello_word/components/TextBox.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hello_word/components/NumberFormInput.dart';
+import 'package:hello_word/components/TextFormInput.dart';
+import 'package:hello_word/models/user.dart';
+import 'package:provider/provider.dart';
 
 import '../../AppState.dart';
-import '../pages.dart';
+import '../../components/TextBox.dart';
 
-class GradesPageAdd extends StatelessWidget {
-  //final String? user;
+@immutable
+class GradesPageAdd extends StatefulWidget {
+  GradesPageAdd({Key? key, required this.user}) : super(key: key);
+  final Student user;
 
-  const GradesPageAdd({Key? key}) : super(key: key);
+  @override
+  _GradesPageAddState createState() => _GradesPageAddState();
+}
+
+class _GradesPageAddState extends State<GradesPageAdd> {
+  TextEditingController _n1Controller = TextEditingController();
+  TextEditingController _n2Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +52,15 @@ class GradesPageAdd extends StatelessWidget {
                     ),
                   ),
                 ),
-                BoxInputField(
-                  icon: Icons.assignment,
-                  onChanged: (value) {},
-                ),
+                NumberFormInput(
+                    size: MediaQuery.of(context).size,
+                    formController: _n1Controller,
+                    icon: Icons.assignment,
+                    validator: (value) {
+                      if (value!.isEmpty || double.tryParse(value) == null) {
+                        return 'Entre com um número';
+                      }
+                    }),
                 SizedBox(
                   height: 10,
                 ),
@@ -64,19 +78,27 @@ class GradesPageAdd extends StatelessWidget {
                     ),
                   ),
                 ),
-                BoxInputField(
+                NumberFormInput(
+                  formController: _n2Controller,
                   icon: Icons.assignment,
-                  onChanged: (value) {},
+                  size: MediaQuery.of(context).size,
+                  validator: (value) {
+                    if (value!.isEmpty || double.tryParse(value) == null) {
+                      return 'Entre com um número';
+                    }
+                  },
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                TextBox(
-                    text: 'CONFIRMAR',
-                    press: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => HomePage()));
-                    })
+                Consumer<AppState>(
+                    builder: (context, appState, _) => TextBox(
+                        text: 'CONFIRMAR',
+                        press: () {
+                          num n1 = double.parse(_n1Controller.text);
+                          num n2 = double.parse(_n2Controller.text);
+                          appState.updateGrades(widget.user, n1, n2);
+                        }))
               ],
             ),
           ),
