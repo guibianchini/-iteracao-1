@@ -15,6 +15,11 @@ class AppState extends ChangeNotifier {
   List<Student> _students = [];
   List<Student> get students => _students;
 
+  num nota1 = 0;
+  num nota2 = 0;
+
+  Student? currntStudent;
+
   User? currentUser;
 
   Future<void> init() async {
@@ -30,8 +35,9 @@ class AppState extends ChangeNotifier {
             _students.add(Student(
                 id: element.data()['userId'],
                 name: element.data()['displayName'],
-                email: element.data()['email']));
-            print(_students);
+                email: element.data()['email'],
+                n1: element.data()['nota1'],
+                n2: element.data()['nota2']));
           });
         });
         notifyListeners();
@@ -85,7 +91,6 @@ class AppState extends ChangeNotifier {
       return uType;
     } on FirebaseAuthException catch (e) {
       UserType uType1 = UserType(cond: false, usertype: 2);
-      print(e.message);
       errorCallback(e);
       return uType1;
     }
@@ -104,8 +109,8 @@ class AppState extends ChangeNotifier {
         'role': "user",
         'timestamp': DateTime.now().millisecondsSinceEpoch,
         'userId': crr.user?.uid,
-        'nota1': 0,
-        'nota2': 0,
+        'nota1': nota1,
+        'nota2': nota2,
       });
       return true;
     } on FirebaseAuthException catch (e) {
@@ -129,6 +134,17 @@ class AppState extends ChangeNotifier {
         .collection('alunos')
         .doc(uniqueID)
         .update({"nota1": n1, "nota2": n2});
+  }
+
+  Future<Student?> getStudent(String id) async {
+    await FirebaseFirestore.instance
+        .collection('alunos')
+        .where('userId', isEqualTo: id)
+        .get()
+        .then((querySnapshot) {
+      return querySnapshot.docs.first.data();
+    });
+    return null;
   }
 
   void signOut() {

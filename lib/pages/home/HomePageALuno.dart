@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../pages.dart';
+import 'package:provider/provider.dart';
+import '../../AppState.dart';
+import '../pages.dart' as pages;
 
 class HomePageAluno extends StatefulWidget {
   @override
@@ -8,14 +10,8 @@ class HomePageAluno extends StatefulWidget {
 }
 
 class _HomePageAlunoState extends State<HomePageAluno> {
-  final users = {};
-
   @override
   Widget build(BuildContext context) {
-    double nota1 = 5;
-    double nota2 = 7;
-    double media = (nota1 + nota2) / 2;
-
     return Scaffold(
       backgroundColor: Colors.teal,
       appBar: AppBar(
@@ -56,47 +52,48 @@ class _HomePageAlunoState extends State<HomePageAluno> {
           leading: Icon(Icons.exit_to_app_outlined),
           title: Text('Sair'),
           onTap: () => {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => LoginPage()))
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => pages.LoginPage()))
           },
         ),
       ])),
       body: Center(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-            Text(
-              'Nota 1: $nota1',
-              style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Nota 2: $nota2',
-              style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Média: $media',
-              style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ])),
+          child: Consumer<AppState>(
+              builder: (context, appState, _) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Nota 1: ${}',
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Nota 2: ${}',
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Média: ${}',
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ]))),
     );
   }
 }
