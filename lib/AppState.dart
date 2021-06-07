@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
+import 'models/user_type.dart';
 
 import 'package:hello_word/models/user.dart';
 
@@ -42,7 +43,7 @@ class AppState extends ChangeNotifier {
     });
   }
 
-  Future<bool> signInWithEmailAndPassword(
+  Future<UserType> signInWithEmailAndPassword(
     String email,
     String password,
     void Function(FirebaseAuthException e) errorCallback,
@@ -52,13 +53,41 @@ class AppState extends ChangeNotifier {
         email: email,
         password: password,
       );
+      UserType uType = UserType(cond: false, usertype: 0);
+
       currentUser = FirebaseAuth.instance.currentUser;
 
-      return true;
+      var uid = currentUser!.uid.toString();
+      await FirebaseFirestore.instance
+          .collection('admins')
+          .get()
+          .then((QuerySnapshot querySnapshot) => {
+                querySnapshot.docs.forEach((doc) {
+                  if (doc.id == uid) {
+                    uType.cond = true;
+                    uType.usertype = 1;
+                  }
+                })
+              });
+
+      await FirebaseFirestore.instance
+          .collection('alunos')
+          .where('userId', isEqualTo: uid)
+          .get()
+          .then((QuerySnapshot querySnapshot) => {
+                querySnapshot.docs.forEach((doc) {
+                  if (doc.data().toString().contains(uid)) {
+                    uType.cond = true;
+                    uType.usertype = 0;
+                  }
+                })
+              });
+      return uType;
     } on FirebaseAuthException catch (e) {
+      UserType uType1 = UserType(cond: false, usertype: 2);
       print(e.message);
       errorCallback(e);
-      return false;
+      return uType1;
     }
   }
 
