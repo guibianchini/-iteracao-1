@@ -3,7 +3,7 @@ import 'package:hello_word/models/user.dart';
 import '../pages/pages.dart';
 
 class UserTileGrade extends StatefulWidget {
-  final User user;
+  final Student user;
   const UserTileGrade(this.user);
 
   @override

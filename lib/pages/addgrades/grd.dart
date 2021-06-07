@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hello_word/components/BoxInputField.dart';
 import 'package:hello_word/components/TextBox.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../AppState.dart';
 import '../pages.dart';
 
 class GradesPageAdd extends StatelessWidget {
+  //final String? user;
+
   const GradesPageAdd({Key? key}) : super(key: key);
 
   @override

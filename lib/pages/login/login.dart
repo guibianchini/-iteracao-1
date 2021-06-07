@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hello_word/components/BoxInputField.dart';
-import 'package:hello_word/components/PasswordBox.dart';
+import 'package:hello_word/components/TextBox.dart';
 import 'package:provider/provider.dart';
 
-import '../../services/auth.dart';
+import '../../components/PasswordFormInput.dart';
+import '../../components/TextFormInput.dart';
 import 'package:hello_word/AppState.dart';
+import '../pages.dart' as pages;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,6 +13,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController _emailFormController = TextEditingController();
+  TextEditingController _passwordFormController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -51,9 +55,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                BoxInputField(
+                TextFormInput(
+                  size: size,
+                  formController: _emailFormController,
                   icon: Icons.email,
-                  onChanged: (value) {},
+                  validator: (value) {
+                    return "Preencha esse campo!";
+                  },
                 ),
                 SizedBox(height: size.height * 0.05),
                 Align(
@@ -70,17 +78,40 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                PasswordBox(onChanged: (value) {
-                  setState(() {});
-                }),
+                PasswordFormInput(
+                    size: size,
+                    passwordFormController: _passwordFormController,
+                    validator: (value) {}),
                 SizedBox(height: size.height * 0.05),
                 Consumer<AppState>(
-                    builder: (context, appState, _) => Auth(
-                          logInWithEmailAndPassword:
-                              appState.signInWithEmailAndPassword,
-                          loginState: appState.loginState,
-                          signOut: appState.signOut,
-                        )),
+                    builder: (context, appState, _) => TextBox(
+                        text: 'Login',
+                        press: () async {
+                          bool shouldNavigate = await appState
+                              .signInWithEmailAndPassword(
+                                  _emailFormController.text,
+                                  _passwordFormController.text, (e) {
+                            showDialog<void>(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      title: Text("Login Error"),
+                                      content: Text(e.message!),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: const Text('OK'),
+                                        )
+                                      ],
+                                    ));
+                          });
+                          if (shouldNavigate) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => pages.HomePage()));
+                            _emailFormController.clear();
+                            _passwordFormController.clear();
+                          }
+                        })),
               ],
             ),
           ],

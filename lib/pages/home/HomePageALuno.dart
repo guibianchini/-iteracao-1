@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hello_word/components/users_data.dart';
 
 import '../pages.dart';
 
@@ -9,7 +8,7 @@ class HomePageAluno extends StatefulWidget {
 }
 
 class _HomePageAlunoState extends State<HomePageAluno> {
-  final users = {...data_Users};
+  final users = {};
 
   @override
   Widget build(BuildContext context) {

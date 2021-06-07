@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hello_word/components/user_tile.dart';
-import 'package:hello_word/components/users_data.dart';
 
 class GradesPage extends StatelessWidget {
   const GradesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final users = {...data_Users};
+    final users = {};
     return Scaffold(
       appBar: AppBar(
           elevation: 20,
