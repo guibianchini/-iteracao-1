@@ -14,16 +14,13 @@ class _UserTileGradeState extends State<UserTileGrade> {
   @override
   Widget build(BuildContext context) {
     // ignore: unnecessary_null_comparison
-    final avatar = widget.user.avatarUrl == null ||
-            widget.user.avatarUrl.isEmpty
-        ? CircleAvatar(
-            child: Icon(Icons.person),
-          )
-        : CircleAvatar(backgroundImage: NetworkImage(widget.user.avatarUrl));
+    final avatar = CircleAvatar(
+      child: Icon(Icons.person),
+    );
     return Container(
       child: ListTile(
           leading: avatar,
-          title: Text(widget.user.name),
+          title: Text(widget.user.name == null ? "Teste" : ""),
           subtitle: Text(widget.user.email),
           trailing: ElevatedButton(
               onPressed: () {

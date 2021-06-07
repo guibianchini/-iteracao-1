@@ -25,8 +25,8 @@ class Signup extends StatelessWidget {
         appBar: AppBar(
             leading: BackButton(
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => pages.HomePage()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => pages.HomePage()));
               },
             ),
             elevation: 20,
@@ -166,6 +166,7 @@ class Signup extends StatelessWidget {
                                           ));
                                 });
                                 if (shouldNavigate) {
+                                  print([_displayNameController]);
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => pages.HomePage()));
                                 }

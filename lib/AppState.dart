@@ -1,32 +1,47 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
-enum LoginState {
-  loggedIn,
-  notLogged,
-}
+import 'package:hello_word/models/user.dart';
 
 class AppState extends ChangeNotifier {
   AppState() {
     init();
   }
 
+  StreamSubscription<QuerySnapshot>? _studentsSubscription;
+  List<Student> _students = [];
+  List<Student> get students => _students;
+
+  User? currentUser;
+
   Future<void> init() async {
     FirebaseAuth.instance.userChanges().listen((user) {
       if (user != null) {
-        _loginState = LoginState.loggedIn;
+        _studentsSubscription = FirebaseFirestore.instance
+            .collection('alunos')
+            .orderBy('email')
+            .snapshots()
+            .listen((event) {
+          _students = [];
+          event.docs.forEach((element) {
+            _students.add(Student(
+                id: element.data()['userId'],
+                name: null,
+                email: element.data()['email']));
+          });
+        });
         notifyListeners();
+      } else {
+        _students = [];
+        _studentsSubscription?.cancel();
       }
       notifyListeners();
     });
   }
-
-  LoginState _loginState = LoginState.notLogged;
-  LoginState get loginState => _loginState;
-
-  User? currentUser;
 
   Future<bool> signInWithEmailAndPassword(
     String email,
@@ -51,18 +66,18 @@ class AppState extends ChangeNotifier {
   Future<bool> registerUser(String email, String displayName, String password,
       void Function(FirebaseAuthException e) errorCallback) async {
     try {
-      var credential = await FirebaseAuth.instance
+      UserCredential cr = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      await credential.user!
-          .updateDisplayName(displayName)
-          .then((value) => FirebaseFirestore.instance.collection('alunos').add({
-                'userId': credential.user!.uid,
-                'displayName': credential.user!.displayName,
-                'email': credential.user!.email,
-                'timestamp': DateTime.now().millisecondsSinceEpoch,
-                'role': 'user',
-              }));
+      await cr.user!.updateDisplayName(displayName);
 
+      FirebaseFirestore.instance.collection('alunos').add({
+        'displayName': cr.user!.displayName,
+        'userId': cr.user!.uid,
+        'email': cr.user!.email,
+        'timestamp': DateTime.now().millisecondsSinceEpoch,
+        'role': 'user',
+      });
+      print(cr.toString());
       return true;
     } on FirebaseAuthException catch (e) {
       errorCallback(e);
@@ -72,6 +87,6 @@ class AppState extends ChangeNotifier {
 
   void signOut() {
     FirebaseAuth.instance.signOut();
-    _loginState = LoginState.notLogged;
+    currentUser = null;
   }
 }

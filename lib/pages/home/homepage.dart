@@ -13,8 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final users = {};
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -71,19 +69,22 @@ class _HomePageState extends State<HomePage> {
                       leading: Icon(Icons.exit_to_app_outlined),
                       title: Text('Sair'),
                       onTap: () => {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => pages.LoginPage()))
+                            value.signOut()
                           });
                 },
               ),
             ])),
-            body: Stack(
-              children: <Widget>[
-                ListView.builder(
-                    itemCount: users.length,
-                    itemBuilder: (context, i) =>
-                        UserTileGrade(users.values.elementAt(i))),
-              ],
+            body: Consumer<AppState>(
+              builder: (context, appState, _) {
+                return Stack(
+                  children: [
+                    ListView.builder(
+                        itemCount: appState.students.length,
+                        itemBuilder: (context, i) =>
+                            UserTileGrade(appState.students.elementAt(i))),
+                  ],
+                );
+              },
             ),
           );
         }
