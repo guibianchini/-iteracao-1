@@ -4,6 +4,8 @@ import 'package:hello_word/components/TextFormInput.dart';
 import 'package:hello_word/models/user.dart';
 import 'package:provider/provider.dart';
 
+import '../pages.dart' as pages;
+
 import '../../AppState.dart';
 import '../../components/TextBox.dart';
 
@@ -98,6 +100,8 @@ class _GradesPageAddState extends State<GradesPageAdd> {
                           num n1 = double.parse(_n1Controller.text);
                           num n2 = double.parse(_n2Controller.text);
                           appState.updateGrades(widget.user, n1, n2);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => pages.HomePage()));
                         }))
               ],
             ),
