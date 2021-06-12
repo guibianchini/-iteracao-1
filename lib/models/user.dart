@@ -1,9 +1,9 @@
 class Student {
-  final String id;
-  final String name;
-  final String email;
-  final num n1;
-  final num n2;
+  String id;
+  String name;
+  String email;
+  num n1;
+  num n2;
 
   Student(
       {required this.id,
@@ -12,5 +12,6 @@ class Student {
       required this.n1,
       required this.n2});
 
-  String toString() => "Id: $id, Name: $name, email: $email";
+  String toString() =>
+      "Id: $id, Name: $name, email: $email, Nota 1: $n1, Nota 2: $n2";
 }

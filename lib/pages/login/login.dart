@@ -107,12 +107,14 @@ class _LoginPageState extends State<LoginPage> {
                                     ));
                           });
                           if (shouldNavigate.cond) {
-                            if (shouldNavigate.usertype == 1) {
+                            if (shouldNavigate.usertype == UserDesc.Admin) {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => pages.HomePage()));
-                            } else if (shouldNavigate.usertype == 0) {
+                            } else if (shouldNavigate.usertype ==
+                                UserDesc.Student) {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => pages.HomePageAluno()));
+                                  builder: (context) => pages.HomePageAluno(
+                                      student: appState.currentStudent)));
                               _emailFormController.clear();
                               _passwordFormController.clear();
                             }

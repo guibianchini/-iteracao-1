@@ -47,4 +47,4 @@ app.*.map.json
 
 /android/app/google-services.json
 
-/web/firebase-config.js
+/web/firebase-config.js 

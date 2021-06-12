@@ -15,11 +15,7 @@ class AppState extends ChangeNotifier {
   List<Student> _students = [];
   List<Student> get students => _students;
 
-  num nota1 = 0;
-  num nota2 = 0;
-
-  Student? currntStudent;
-
+  Student currentStudent = Student(id: '', name: '', email: '', n1: 0, n2: 0);
   User? currentUser;
 
   Future<void> init() async {
@@ -59,7 +55,7 @@ class AppState extends ChangeNotifier {
         email: email,
         password: password,
       );
-      UserType uType = UserType(cond: false, usertype: 0);
+      UserType uType = UserType(cond: false, usertype: UserDesc.Student);
 
       currentUser = FirebaseAuth.instance.currentUser;
 
@@ -71,7 +67,7 @@ class AppState extends ChangeNotifier {
                 querySnapshot.docs.forEach((doc) {
                   if (doc.id == uid) {
                     uType.cond = true;
-                    uType.usertype = 1;
+                    uType.usertype = UserDesc.Admin;
                   }
                 })
               });
@@ -80,17 +76,25 @@ class AppState extends ChangeNotifier {
           .collection('alunos')
           .where('userId', isEqualTo: uid)
           .get()
-          .then((QuerySnapshot querySnapshot) => {
+          .then((QuerySnapshot<Map<String, dynamic>> querySnapshot) => {
                 querySnapshot.docs.forEach((doc) {
                   if (doc.data().toString().contains(uid)) {
                     uType.cond = true;
-                    uType.usertype = 0;
+                    uType.usertype = UserDesc.Student;
+
+                    //Se é um usuário estudante, atualiza o valor da variável
+
+                    currentStudent.id = doc.data()['userId'];
+                    currentStudent.email = doc.data()['email'];
+                    currentStudent.name = doc.data()['displayName'];
+                    currentStudent.n1 = doc.data()['nota1'];
+                    currentStudent.n2 = doc.data()['nota2'];
                   }
                 })
               });
       return uType;
     } on FirebaseAuthException catch (e) {
-      UserType uType1 = UserType(cond: false, usertype: 2);
+      UserType uType1 = UserType(cond: false, usertype: UserDesc.Error);
       errorCallback(e);
       return uType1;
     }
@@ -109,8 +113,8 @@ class AppState extends ChangeNotifier {
         'role': "user",
         'timestamp': DateTime.now().millisecondsSinceEpoch,
         'userId': crr.user?.uid,
-        'nota1': nota1,
-        'nota2': nota2,
+        'nota1': 0,
+        'nota2': 0,
       });
       return true;
     } on FirebaseAuthException catch (e) {

@@ -1,6 +1,8 @@
+enum UserDesc { Student, Admin, Error }
+
 class UserType {
   bool cond;
-  int usertype;
+  UserDesc usertype;
 
   UserType({
     required this.cond,
