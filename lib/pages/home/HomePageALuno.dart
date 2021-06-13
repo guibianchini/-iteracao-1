@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../models/user.dart';
-import '../pages.dart' as pages;
+import 'package:hello_word/pages/pages.dart' as pages;
+
+import 'package:hello_word/models/user.dart';
 
 class HomePageAluno extends StatefulWidget {
   HomePageAluno({required this.student});

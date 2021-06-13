@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hello_word/AppState.dart';
-import 'package:hello_word/components/TextBox.dart';
 import 'package:provider/provider.dart';
-import 'package:hello_word/components/PasswordFormInput.dart';
-import 'package:hello_word/components/TextFormInput.dart';
 
-import '../pages.dart' as pages;
+import 'package:hello_word/pages/pages.dart' as pages;
+
+import 'package:hello_word/AppState.dart';
+
+import 'package:hello_word/components/PasswordFormInput.dart';
+import 'package:hello_word/components/TextBox.dart';
+import 'package:hello_word/components/TextFormInput.dart';
 
 class Signup extends StatelessWidget {
   final TextEditingController _displayNameController = TextEditingController();

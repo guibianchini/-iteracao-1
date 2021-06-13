@@ -1,10 +1,11 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:async';
-import 'models/user_type.dart';
 
 import 'package:hello_word/models/user.dart';
+import 'package:hello_word/models/user_type.dart';
 
 class AppState extends ChangeNotifier {
   AppState() {

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hello_word/components/TextBox.dart';
-import 'package:hello_word/models/user_type.dart';
 import 'package:provider/provider.dart';
 
-import '../../components/PasswordFormInput.dart';
-import '../../components/TextFormInput.dart';
+import 'package:hello_word/pages/pages.dart' as pages;
+
 import 'package:hello_word/AppState.dart';
-import '../pages.dart' as pages;
+
+import 'package:hello_word/components/PasswordFormInput.dart';
+import 'package:hello_word/components/TextBox.dart';
+import 'package:hello_word/components/TextFormInput.dart';
+
+import 'package:hello_word/models/user_type.dart';
 
 class LoginPage extends StatefulWidget {
   @override
