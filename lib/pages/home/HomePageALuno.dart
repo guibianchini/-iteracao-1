@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../models/user.dart';
-import '../pages.dart' as pages;
+import 'package:hello_word/pages/pages.dart' as pages;
+
+import 'package:hello_word/models/user.dart';
 
 class HomePageAluno extends StatefulWidget {
   HomePageAluno({required this.student});
@@ -115,7 +116,7 @@ class _HomePageAlunoState extends State<HomePageAluno> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Usuário estudante: ${widget.student.name}",
+                    'Usuário estudante: ${widget.student.name}',
                     style: TextStyle(fontSize: 18),
                   ),
                 ],

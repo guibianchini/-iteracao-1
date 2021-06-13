@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'BoxContainer.dart';
+import 'package:hello_word/components/BoxContainer.dart';
 
 class PasswordBox extends StatelessWidget {
   final ValueChanged<String> onChanged;

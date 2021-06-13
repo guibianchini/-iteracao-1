@@ -13,5 +13,5 @@ class Student {
       required this.n2});
 
   String toString() =>
-      "Id: $id, Name: $name, email: $email, Nota 1: $n1, Nota 2: $n2";
+      'Id: $id, Name: $name, email: $email, Nota 1: $n1, Nota 2: $n2';
 }

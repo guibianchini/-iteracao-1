@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hello_word/components/TextBox.dart';
-import 'package:hello_word/models/user_type.dart';
 import 'package:provider/provider.dart';
 
-import '../../components/PasswordFormInput.dart';
-import '../../components/TextFormInput.dart';
+import 'package:hello_word/pages/pages.dart' as pages;
+
 import 'package:hello_word/AppState.dart';
-import '../pages.dart' as pages;
+
+import 'package:hello_word/components/PasswordFormInput.dart';
+import 'package:hello_word/components/TextBox.dart';
+import 'package:hello_word/components/TextFormInput.dart';
+
+import 'package:hello_word/models/user_type.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -61,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                   formController: _emailFormController,
                   icon: Icons.email,
                   validator: (value) {
-                    return "Preencha esse campo!";
+                    return 'Preencha esse campo!';
                   },
                 ),
                 SizedBox(height: size.height * 0.05),
@@ -95,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                             showDialog<void>(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                      title: Text("Login Error"),
+                                      title: Text('Login Error'),
                                       content: Text(e.message!),
                                       actions: [
                                         TextButton(
