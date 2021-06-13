@@ -1,11 +1,11 @@
-//import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:hello_word/AppState.dart';
-import 'package:hello_word/components/user_tile.dart';
 import 'package:provider/provider.dart';
 
-import '../pages.dart' as pages;
+import 'package:hello_word/pages/pages.dart' as pages;
+
+import 'package:hello_word/AppState.dart';
+
+import 'package:hello_word/components/user_tile.dart';
 
 class HomePage extends StatefulWidget {
   @override

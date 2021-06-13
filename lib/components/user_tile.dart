@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:hello_word/models/user.dart';
-import '../pages/pages.dart';
+import 'package:hello_word/pages/pages.dart';
 
 class UserTileGrade extends StatefulWidget {
   final Student user;

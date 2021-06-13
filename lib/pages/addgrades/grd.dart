@@ -1,14 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:hello_word/components/NumberFormInput.dart';
-import 'package:hello_word/models/user.dart';
 import 'package:provider/provider.dart';
 
-import '../pages.dart' as pages;
+import 'package:hello_word/pages/pages.dart' as pages;
 
-import '../../AppState.dart';
-import '../../components/TextBox.dart';
+import 'package:hello_word/AppState.dart';
+
+import 'package:hello_word/components/NumberFormInput.dart';
+import 'package:hello_word/components/TextBox.dart';
+
+import 'package:hello_word/models/user.dart';
 
 @immutable
 class GradesPageAdd extends StatefulWidget {
