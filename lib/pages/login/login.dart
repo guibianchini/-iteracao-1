@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                   formController: _emailFormController,
                   icon: Icons.email,
                   validator: (value) {
-                    return "Preencha esse campo!";
+                    return 'Preencha esse campo!';
                   },
                 ),
                 SizedBox(height: size.height * 0.05),
@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                             showDialog<void>(
                                 context: context,
                                 builder: (context) => AlertDialog(
-                                      title: Text("Login Error"),
+                                      title: Text('Login Error'),
                                       content: Text(e.message!),
                                       actions: [
                                         TextButton(

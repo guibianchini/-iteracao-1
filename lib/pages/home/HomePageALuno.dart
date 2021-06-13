@@ -116,7 +116,7 @@ class _HomePageAlunoState extends State<HomePageAluno> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Usuário estudante: ${widget.student.name}",
+                    'Usuário estudante: ${widget.student.name}',
                     style: TextStyle(fontSize: 18),
                   ),
                 ],
