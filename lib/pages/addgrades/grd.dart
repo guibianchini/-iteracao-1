@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hello_word/components/NumberFormInput.dart';
 import 'package:hello_word/models/user.dart';
@@ -96,8 +98,8 @@ class _GradesPageAddState extends State<GradesPageAdd> {
                     builder: (context, appState, _) => TextBox(
                         text: 'CONFIRMAR',
                         press: () {
-                          num n1 = double.parse(_n1Controller.text);
-                          num n2 = double.parse(_n2Controller.text);
+                          final n1 = gradeParse(_n1Controller.text);
+                          final n2 = gradeParse(_n2Controller.text);
                           appState.updateGrades(widget.user, n1, n2);
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => pages.HomePage()));
@@ -108,3 +110,5 @@ class _GradesPageAddState extends State<GradesPageAdd> {
         ));
   }
 }
+
+double gradeParse(String input) => max(0, min(10, double.tryParse(input) ?? 0));
