@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Consumer<AppState>(
                   builder: (context, appstate, _) => Text(
-                    "Usuário ADM:${appstate.currentUser!.displayName}",
+                    'Usuário ADM:${appstate.currentUser!.displayName}',
                     style: TextStyle(fontSize: 18),
                   ),
                 )
