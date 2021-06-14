@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'BoxContainer.dart';
+import 'package:hello_word/components/BoxContainer.dart';
 
 class BoxInputField extends StatelessWidget {
   final IconData icon;

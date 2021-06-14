@@ -1,10 +1,11 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:async';
-import 'models/user_type.dart';
 
 import 'package:hello_word/models/user.dart';
+import 'package:hello_word/models/user_type.dart';
 
 class AppState extends ChangeNotifier {
   AppState() {
@@ -110,7 +111,7 @@ class AppState extends ChangeNotifier {
       FirebaseFirestore.instance.collection('alunos').add({
         'displayName': displayName,
         'email': crr.user?.email,
-        'role': "user",
+        'role': 'user',
         'timestamp': DateTime.now().millisecondsSinceEpoch,
         'userId': crr.user?.uid,
         'nota1': 0,
@@ -137,7 +138,7 @@ class AppState extends ChangeNotifier {
     await FirebaseFirestore.instance
         .collection('alunos')
         .doc(uniqueID)
-        .update({"nota1": n1, "nota2": n2});
+        .update({'nota1': n1, 'nota2': n2});
   }
 
   Future<Student?> getStudent(String id) async {

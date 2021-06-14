@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:hello_word/AppState.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/pages.dart' as pages;
+import 'package:hello_word/pages/pages.dart' as pages;
+
+import 'package:hello_word/AppState.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

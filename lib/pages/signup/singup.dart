@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hello_word/AppState.dart';
-import 'package:hello_word/components/TextBox.dart';
 import 'package:provider/provider.dart';
-import 'package:hello_word/components/PasswordFormInput.dart';
-import 'package:hello_word/components/TextFormInput.dart';
 
-import '../pages.dart' as pages;
+import 'package:hello_word/pages/pages.dart' as pages;
+
+import 'package:hello_word/AppState.dart';
+
+import 'package:hello_word/components/PasswordFormInput.dart';
+import 'package:hello_word/components/TextBox.dart';
+import 'package:hello_word/components/TextFormInput.dart';
 
 class Signup extends StatelessWidget {
   final TextEditingController _displayNameController = TextEditingController();
@@ -114,7 +116,7 @@ class Signup extends StatelessWidget {
                           passwordFormController: _passwordController,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return "Preencha esse campo!";
+                              return 'Preencha esse campo!';
                             }
                           }),
                       SizedBox(height: size.height * 0.01),
@@ -138,7 +140,7 @@ class Signup extends StatelessWidget {
                           validator: (value) {
                             if (value!.isEmpty ||
                                 value != _passwordController.text) {
-                              return "As senhas devem ser iguais!";
+                              return 'As senhas devem ser iguais!';
                             }
                           }),
                       Consumer<AppState>(
@@ -154,7 +156,7 @@ class Signup extends StatelessWidget {
                                   showDialog<void>(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                            title: Text("Login Error"),
+                                            title: Text('Login Error'),
                                             content: Text(e.message!),
                                             actions: [
                                               TextButton(
