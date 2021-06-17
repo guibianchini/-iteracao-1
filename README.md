@@ -21,4 +21,5 @@
 De início, o membro Adriano Richard realizou uma breve apresentação ao grupo do que já havia sido implementado de front end e disponibilizou a pasta para o grupo baixar através do wetransfer, porém o prazo de transferência já expirou.
 + ![image](https://user-images.githubusercontent.com/84343335/122316530-6f523c80-cef2-11eb-97ae-5909052f52ac.png)
 
+Esse arquivo foi o primeiro commit do projeto
 + As demais iterações foram feitar em conjunto em ligação via discord, porém não há como evidenciar entradas e saídas de canais de voz do discord
